@@ -38,6 +38,7 @@ const WebSocketComponent = () => {
       }
 
       data.players.push(tempPlayer)
+      data.players.push(tempPlayer)
       setPlayerData(data.players)
     }
 
@@ -48,12 +49,22 @@ const WebSocketComponent = () => {
 
   return (
     <div>
-      {webSocketData && <p>Player Count: {webSocketData.player_count}</p>}
-      <p>Player Info:</p>
+      {webSocketData && <p className="font-bold">Player Count: {webSocketData.player_count}</p>}
+      {/* <p>Player Info:</p> */}
       <div className="flex flex-wrap gap-4 py-1">
-        {playerData.map((player, i) => {
-          return <PlayerInfo key={i} player={player} />
-        })}
+        {playerData
+          .slice()
+          .sort((a, b) => (a.sequence >= b.sequence ? 1 : -1))
+          .map((player, i) => {
+            return <PlayerInfo key={i} player={player} />
+          })}
+      </div>
+      <div className="flex items-center justify-start gap-2 py-5">
+        <div className="font-bold">Ready to move: &nbsp;</div>
+        <div className="border-b-blue w-8 border-b-2" />
+        <div>True &nbsp;</div>
+        <div className="border-b-gray w-8 border-b-2" />
+        <div>False</div>
       </div>
     </div>
   )
