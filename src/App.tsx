@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import WebSocketComponent from './components/WebSocketComponent';
+import WebSocketComponent from './components/webSocket-componen';
 
 function App() {
   return (
