@@ -21,24 +21,6 @@ const WebSocketComponent = () => {
       const data: WebSocketData = JSON.parse(event.data)
       setWebSocketData(data)
       // console.log(data);
-
-      const tempPlayer = {
-        device_id: "temp_device",
-        chapter: 1,
-        sequence: 1,
-        ready_to_move: true,
-        left_hand_position: { x: 0, y: 0, z: 0 },
-        left_hand_forward: { x: 0, y: 0, z: 0 },
-        right_hand_position: { x: 0, y: 0, z: 0 },
-        right_hand_forward: { x: 0, y: 0, z: 0 },
-        left_hand_available: true,
-        right_hand_available: true,
-        head_position: { x: 0, y: 5, z: 10 },
-        head_forward: { x: 0, y: 0, z: 0 },
-      }
-
-      data.players.push(tempPlayer)
-      data.players.push(tempPlayer)
       setPlayerData(data.players)
     }
 
