@@ -7,8 +7,8 @@ const WebSocketComponent = () => {
   const [webSocketData, setWebSocketData] = useState<WebSocketData | null>()
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080/ws/control/Test")
-
+    const ws = new WebSocket("ws://140.112.49.159:8080/ws/control/test")
+    // test = room name
     ws.onopen = () => {
       console.log("open connection")
     }
@@ -36,9 +36,9 @@ const WebSocketComponent = () => {
       </p>
       <div className="flex items-center justify-start gap-2 py-3">
         <div className="font-bold">Ready to move: &nbsp;</div>
-        <div className="border-b-blue w-8 border-b-2" />
-        <div>True &nbsp;</div>
-        <div className="border-b-gray w-8 border-b-2" />
+        <div className="w-8 border-b-2 border-b-blue" />
+        <div >True &nbsp;</div>
+        <div className="w-8 border-b-2 border-b-gray" />
         <div>False</div>
       </div>
       {/* <p>Player Info:</p> */}
