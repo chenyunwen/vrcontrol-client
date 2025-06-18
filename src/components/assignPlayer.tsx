@@ -1,8 +1,9 @@
 import { useEffect } from "react"
+import { SERVER } from "@/../environment"
 
 export const AssignPlayer = () => {
   async function getPlayer() {
-    fetch(`http://140.112.49.159:8080/control/playerlist`).then((r) =>
+    fetch(`http://${SERVER}/control/playerlist`).then((r) =>
       r.json().then((t) => {
         console.log(t)
       }),

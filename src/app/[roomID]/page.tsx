@@ -1,14 +1,19 @@
+"use client"
+import PlayerInfo from "@/components/playerInfo"
+import { Player, WebSocketData } from "@/interfaces/websocket.interface"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import PlayerInfo from "./playerInfo"
-import { Player, WebSocketData } from "../interfaces/websocket.interface"
-import { SERVER } from "../../environment"
+import { SERVER } from "@/../environment"
 
-const WebSocketComponent = () => {
+export const RoomState = () => {
+    const pathSegments = usePathname().split("/")
+
+  const roomID = pathSegments.pop()
   const [playerData, setPlayerData] = useState<Player[]>([])
   const [webSocketData, setWebSocketData] = useState<WebSocketData | null>()
 
   useEffect(() => {
-    const ws = new WebSocket(`ws://${SERVER}/ws/control/test`)
+    const ws = new WebSocket(`ws://${SERVER}/ws/control/${roomID}`)
     // test = room name
     ws.onopen = () => {
       console.log("open connection")
@@ -28,7 +33,7 @@ const WebSocketComponent = () => {
     return () => {
       ws.close()
     }
-  }, [])
+  }, [roomID])
 
   return (
     <div>
@@ -53,6 +58,6 @@ const WebSocketComponent = () => {
       </div>
     </div>
   )
-}
+} 
 
-export default WebSocketComponent
+export default RoomState

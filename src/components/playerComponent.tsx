@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
+import {SERVER} from "@/../environment"
 
 export const Main = () => {
   // const [playerData, setPlayerData] = useState<Player[]>([])
   const [webSocketData, setWebSocketData] = useState()
   useEffect(() => {
-    const ws = new WebSocket("ws://140.112.49.159:8080/ws/client/player1")
+    const ws = new WebSocket(`ws://${SERVER}/ws/client/player1`)
     // test = room name
     ws.onopen = () => {
       console.log("open connection")
