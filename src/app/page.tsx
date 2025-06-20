@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { SERVER } from "@/../environment"
 
-import PlayerList from "@/components/player-list-2"
+import PlayerList from "@/components/player-list"
 import RoomList from "@/components/room-list"
 import RoomCreate from "@/components/room-create"
 
