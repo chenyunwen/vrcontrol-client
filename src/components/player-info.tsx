@@ -1,9 +1,18 @@
-import { Player } from "../interfaces/websocket.interface"
+import dayjs from "dayjs"
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore"
 
-const playerInfo = ({ player }: { player: Player }) => {
+import { PlayerData } from "../interfaces/room.interface"
+
+const PlayerInfo = ({ player }: { player: PlayerData }) => {
+  dayjs.extend(isSameOrBefore)
+
+  const lastUpdateTime = dayjs(player.last_update)
+
+  const currTime = dayjs()
+
   return (
     <div
-      className={`${player.ready_to_move ? "border-blue" : "border-gray"} w-72 rounded-lg border-2 p-2`}
+      className={`${player.ready_to_move ? "border-blue" : "border-gray"} w-96 rounded-lg border-2 p-2`}
     >
       <table className="player-table">
         <tbody>
@@ -39,10 +48,21 @@ const playerInfo = ({ player }: { player: Player }) => {
               ({player.head_position.x}, {player.head_position.y}, {player.head_position.z})
             </td>
           </tr>
+
+          <tr>
+            <td>
+              <strong>Last Update Time</strong>
+            </td>
+            <td
+              className={`${lastUpdateTime.isSameOrBefore(currTime.subtract(5, "second")) && "font-bold text-red-600"}`}
+            >
+              {lastUpdateTime.format("YYYY/MM/DD HH:mm:ss")}
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
   )
 }
 
-export default playerInfo
+export default PlayerInfo

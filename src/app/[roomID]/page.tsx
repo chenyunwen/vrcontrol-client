@@ -1,20 +1,22 @@
 "use client"
-import PlayerInfo from "@/components/playerInfo"
-import { Player, WebSocketData } from "@/interfaces/websocket.interface"
-import { usePathname } from "next/navigation"
+import PlayerInfo from "@/components/player-info"
+import { PlayerData, RoomInfoData } from "@/interfaces/room.interface"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { SERVER } from "@/../environment"
+import Button from "@/components/button"
 
 export const RoomState = () => {
-    const pathSegments = usePathname().split("/")
+  const router = useRouter()
+
+  const pathSegments = usePathname().split("/")
 
   const roomID = pathSegments.pop()
-  const [playerData, setPlayerData] = useState<Player[]>([])
-  const [webSocketData, setWebSocketData] = useState<WebSocketData | null>()
+  const [playerData, setPlayerData] = useState<PlayerData[]>([])
+  const [webSocketData, setWebSocketData] = useState<RoomInfoData | null>()
 
   useEffect(() => {
     const ws = new WebSocket(`ws://${SERVER}/ws/control/${roomID}`)
-    // test = room name
     ws.onopen = () => {
       console.log("open connection")
     }
@@ -24,9 +26,9 @@ export const RoomState = () => {
     }
 
     ws.onmessage = (event) => {
-      const data: WebSocketData = JSON.parse(event.data)
+      const data: RoomInfoData = JSON.parse(event.data)
       setWebSocketData(data)
-      // console.log(data);
+      console.log(data)
       setPlayerData(data.players)
     }
 
@@ -36,14 +38,20 @@ export const RoomState = () => {
   }, [roomID])
 
   return (
-    <div>
+    <div className="w-full">
+      <div>
+        <Button onClick={() => router.push("/")}>&#8249; Back</Button>
+      </div>
+      <p className="py-3">
+        Room name: <span className="font-bold">{roomID}</span>
+      </p>
       <p className="font-bold">
         {webSocketData ? `Player Count: ${webSocketData.player_count}` : "No data available"}
       </p>
       <div className="flex items-center justify-start gap-2 py-3">
         <div className="font-bold">Ready to move: &nbsp;</div>
         <div className="w-8 border-b-2 border-b-blue" />
-        <div >True &nbsp;</div>
+        <div>True &nbsp;</div>
         <div className="w-8 border-b-2 border-b-gray" />
         <div>False</div>
       </div>
@@ -58,6 +66,6 @@ export const RoomState = () => {
       </div>
     </div>
   )
-} 
+}
 
 export default RoomState
