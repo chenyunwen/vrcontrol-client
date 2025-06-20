@@ -17,5 +17,7 @@
   "useTabs": false,
   "embeddedLanguageFormatting": "auto",
   "endOfLine": "auto",
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ]
 }
