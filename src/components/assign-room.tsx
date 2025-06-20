@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Button from "./button"
 
-export const Select = ({
+export const AssignRoom = ({
   player,
   options,
   onClick,
@@ -56,4 +56,4 @@ export const Select = ({
   )
 }
 
-export default Select
+export default AssignRoom

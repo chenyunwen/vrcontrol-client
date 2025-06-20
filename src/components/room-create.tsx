@@ -45,12 +45,12 @@ const RoomCreate = () => {
 
       <input
         type="text"
-        className="rounded px-2 py-1 text-gray"
+        className="mr-3 rounded px-2 py-1 text-gray"
         value={roomName}
         onChange={handleChange}
         placeholder="Enter room ID"
       />
-      <Button className="m-3" onClick={handleCreate} disabled={!roomName || !!error}>
+      <Button className="my-3" onClick={handleCreate} disabled={!roomName || !!error}>
         Create
       </Button>
       {error && <div style={{ color: "red", marginTop: "4px" }}>{error}</div>}

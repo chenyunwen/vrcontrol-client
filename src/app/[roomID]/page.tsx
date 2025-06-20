@@ -43,13 +43,11 @@ export const RoomState = () => {
         <Button onClick={() => router.push("/")}>&#8249; Back</Button>
       </div>
       <p className="py-3">
-        Room name: <span className="font-bold">{roomID}</span>
+        Room ID: <span className="title">{roomID}</span>
       </p>
-      <p className="font-bold">
-        {webSocketData ? `Player Count: ${webSocketData.player_count}` : "No data available"}
-      </p>
+      <p>{webSocketData ? `Player Count: ${webSocketData.player_count}` : "No data available"}</p>
       <div className="flex items-center justify-start gap-2 py-3">
-        <div className="font-bold">Ready to move: &nbsp;</div>
+        <div>Ready to move: &nbsp;</div>
         <div className="w-8 border-b-2 border-b-blue" />
         <div>True &nbsp;</div>
         <div className="w-8 border-b-2 border-b-gray" />
