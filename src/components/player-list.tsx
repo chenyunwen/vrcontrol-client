@@ -5,10 +5,12 @@ import { FiRefreshCcw } from "react-icons/fi"
 const PlayerList = ({
   playerList,
   roomList,
+  countDown,
   refresh,
 }: {
   playerList: string[]
   roomList: string[]
+  countDown: number
   refresh: () => void
 }) => {
   async function assignPlayer(player: string, roomId: string, seq: number) {
@@ -22,7 +24,10 @@ const PlayerList = ({
     <div className="w-full">
       <div className="flex w-full place-items-center justify-between py-2">
         <span className="title">Player List :</span>
-        <FiRefreshCcw className="hover:cursor-pointer hover:opacity-50" onClick={refresh} />
+        <div className="flex place-items-center">
+          <span className="pr-1 text-xs text-white/50">{countDown} 秒後自動更新</span>
+          <FiRefreshCcw className="hover:cursor-pointer hover:opacity-50" onClick={refresh} />
+        </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-2 border-b p-2 font-medium text-white/50">
         <span>Player ID</span>

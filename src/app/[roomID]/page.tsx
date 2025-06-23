@@ -28,7 +28,7 @@ export const RoomState = () => {
     ws.onmessage = (event) => {
       const data: RoomInfoData = JSON.parse(event.data)
       setWebSocketData(data)
-      console.log(data)
+      // console.log(data)
       setPlayerData(data.players)
     }
 

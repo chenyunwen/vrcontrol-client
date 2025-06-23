@@ -9,11 +9,11 @@ const RoomCreate = () => {
   const createRoom = async (roomId: string) => {
     fetch(`http://${SERVER}/control/createroom/${roomId}`, {
       method: "POST",
-    }).then((r) =>
-      r.json().then((j) => {
-        console.log(j)
-      }),
-    )
+    }).then((r) => {
+      if (!r.ok) {
+        r.json().then((j) => setError(j.error))
+      }
+    })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
