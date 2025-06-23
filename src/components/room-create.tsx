@@ -7,7 +7,9 @@ const RoomCreate = () => {
   const [error, setError] = useState("")
 
   const createRoom = async (roomId: string) => {
-    fetch(`http://${SERVER}/control/createroom/${roomId}`).then((r) =>
+    fetch(`http://${SERVER}/control/createroom/${roomId}`, {
+      method: "POST",
+    }).then((r) =>
       r.json().then((j) => {
         console.log(j)
       }),
