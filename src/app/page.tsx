@@ -9,8 +9,7 @@ import RoomCreate from "@/components/room-create"
 export default function Home() {
   const [playerList, setPlayerList] = useState<string[]>([])
   const [roomList, setRoomList] = useState<string[]>([])
-  const [playerCountdown, setPlayerCountdown] = useState<number>(5)
-  const [roomCountdown, setRoomCountdown] = useState<number>(5)
+  const [countdown, setCountdown] = useState<number>(5)
 
   const getPlayer = async () => {
     console.log("fetching player list")
@@ -21,7 +20,6 @@ export default function Home() {
             .slice()
             .sort((a: string, b: string) => a.localeCompare(b, undefined, { numeric: true })),
         )
-        setPlayerCountdown(5)
       }),
     )
   }
@@ -37,28 +35,12 @@ export default function Home() {
 
   useEffect(() => {
     getPlayer()
-
-    const playerIntervalId = setInterval(() => {
-      setPlayerCountdown((prev) => {
-        if (prev === 1) {
-          getPlayer()
-          return 5
-        }
-        return prev - 1
-      })
-    }, 1000)
-
-    return () => {
-      clearInterval(playerIntervalId)
-    }
-  }, [])
-
-  useEffect(() => {
     getRoom()
 
-    const roomIntervalId = setInterval(() => {
-      setRoomCountdown((prev) => {
+    const intervalId = setInterval(() => {
+      setCountdown((prev) => {
         if (prev === 1) {
+          getPlayer()
           getRoom()
           return 5
         }
@@ -67,7 +49,7 @@ export default function Home() {
     }, 1000)
 
     return () => {
-      clearInterval(roomIntervalId)
+      clearInterval(intervalId)
     }
   }, [])
 
@@ -78,14 +60,14 @@ export default function Home() {
           <PlayerList
             playerList={playerList}
             roomList={roomList}
-            countDown={playerCountdown}
+            countdown={countdown}
             refresh={getPlayer}
           />
         </div>
         <div className="flex w-full flex-col items-center gap-8 rounded-lg border border-white p-3 sm:items-start">
           <RoomCreate />
           <div className="m-1 w-full border-b border-white"></div>
-          <RoomList roomList={roomList} countDown={roomCountdown} refresh={getRoom} />
+          <RoomList roomList={roomList} countdown={countdown} refresh={getRoom} />
         </div>
       </main>
     </div>

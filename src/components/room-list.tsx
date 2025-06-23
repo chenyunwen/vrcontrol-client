@@ -4,11 +4,11 @@ import { FiRefreshCcw } from "react-icons/fi"
 
 const RoomList = ({
   roomList,
-  countDown,
+  countdown,
   refresh,
 }: {
   roomList: string[]
-  countDown: number
+  countdown: number
   refresh: () => void
 }) => {
   const router = useRouter()
@@ -19,7 +19,7 @@ const RoomList = ({
         <span className="title">Room List :</span>
 
         <div className="flex place-items-center">
-          <span className="pr-1 text-xs text-white/50">{countDown} 秒後自動更新</span>
+          <span className="pr-1 text-xs text-white/50">{countdown} 秒後自動更新</span>
           <FiRefreshCcw className="hover:cursor-pointer hover:opacity-50" onClick={refresh} />
         </div>
       </div>
